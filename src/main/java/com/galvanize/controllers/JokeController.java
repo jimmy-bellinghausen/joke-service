@@ -43,4 +43,9 @@ public class JokeController {
         return service.getRandomJoke(category);
     }
 
+    @PatchMapping("/{id}")
+    public Joke updateJoke(@PathVariable long id, @RequestBody Joke updateJoke){
+        return service.update(id, updateJoke);
+    }
+
 }
