@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
@@ -25,5 +27,15 @@ public class JokeServiceTest {
         Joke expected = new Joke(1L, Category.DADJOKES,"Hi hungry, I'm dad!");
         when(jokeRepository.save(any(Joke.class))).thenReturn(expected);
         assertEquals(expected,service.postJoke(input));
+    }
+
+    @Test
+    public void getAllJokes(){
+        JokeService service = new JokeService(jokeRepository);
+        Joke expected = new Joke(1L, Category.DADJOKES,"Hi hungry, I'm dad!");
+        ArrayList<Joke> expectedJokes = new ArrayList<>();
+        expectedJokes.add(expected);
+        when(jokeRepository.findAll()).thenReturn(expectedJokes);
+        assertEquals(expectedJokes, service.getAllJokes());
     }
 }

@@ -15,6 +15,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import javax.transaction.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -41,6 +44,18 @@ class JokeControllerTest {
         mvc.perform(post("/api/joke").content(json).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.jokeId").value(expected.getJokeId()));
+    }
+
+    @Test
+    public void getAllJokes() throws Exception{
+        Joke expected = new Joke();
+        expected.setJokeId(1L);
+        ArrayList<Joke> expectedJokes = new ArrayList<>();
+        expectedJokes.add(expected);
+        when(jokeService.getAllJokes()).thenReturn(expectedJokes);
+        mvc.perform(get("/api/joke"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].jokeId").value(expected.getJokeId()));
     }
 
 }
