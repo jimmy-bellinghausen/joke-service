@@ -43,12 +43,12 @@ public class JokeService {
 
     public Joke getRandomJoke() {
         List<Joke> jokes = getAllJokes();
-        return jokes.get((int)(Math.random()*jokes.size()-1));
+        return jokes.get((int)(Math.random()*jokes.size()));
     }
 
     public Joke getRandomJoke(Category category) {
         List<Joke> jokes = getAllJokesByCategory(category);
-        return jokes.get((int)(Math.random()*jokes.size()-1));
+        return jokes.get((int)(Math.random()*jokes.size()));
     }
 
     public Joke update(long jokeId, Joke updateJoke) {
