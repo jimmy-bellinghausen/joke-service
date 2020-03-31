@@ -38,9 +38,9 @@ class JokeControllerTest {
         String json = mapper.writeValueAsString(expected);
         expected.setJokeId(1L);
         when(jokeService.postJoke(ArgumentMatchers.any(Joke.class))).thenReturn(expected);
-        mvc.perform(post("/api/JokeService").content(json).contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(post("/api/joke").content(json).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(expected.getJokeId()));
+                .andExpect(jsonPath("$.jokeId").value(expected.getJokeId()));
     }
 
 }
