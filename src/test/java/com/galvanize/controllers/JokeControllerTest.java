@@ -116,4 +116,15 @@ class JokeControllerTest {
                 .andExpect(jsonPath("$").value(expected));
     }
 
+    @Test
+    public void getRandomJokeByCategory() throws Exception{
+        Joke expected = new Joke();
+        expected.setCategory(Category.DADJOKES);
+        expected.setJokeId(1L);
+        when(jokeService.getRandomJoke(any(Category.class))).thenReturn(expected);
+        mvc.perform(get("/api/joke/random?category=DADJOKES"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").value(expected));
+    }
+
 }

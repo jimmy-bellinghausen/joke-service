@@ -81,4 +81,12 @@ public class JokeServiceTest {
         when(jokeRepository.findAll()).thenReturn(Arrays.asList(expected));
         assertEquals(expected, service.getRandomJoke());
     }
+
+    @Test
+    public void getRandomJokeByCategory(){
+        JokeService service = new JokeService(jokeRepository);
+        Joke expected = new Joke(1L, Category.DADJOKES,"Hi hungry, I'm dad!");
+        when(jokeRepository.findAllByCategory(any(Category.class))).thenReturn(Arrays.asList(expected));
+        assertEquals(expected, service.getRandomJoke(Category.DADJOKES));
+    }
 }
