@@ -32,4 +32,9 @@ public class JokeController {
         return service.getAllJokesContaining(contains, searchCategory);
     }
 
+    @GetMapping("/category")
+    public List<Joke> getAllJokesByCategory(@RequestParam Category category){
+        return service.getAllJokesByCategory(category);
+    }
+
 }
