@@ -61,14 +61,14 @@ class JokeControllerTest {
     }
 
     @Test
-    public void getAllJokesContaing() throws Exception{
+    public void getAllJokesContaining() throws Exception{
         Joke expected = new Joke();
         expected.setJokeId(1L);
         expected.setJoke("Hi hungry, I'm dad!");
         ArrayList<Joke> expectedJokes = new ArrayList<>();
         expectedJokes.add(expected);
         when(jokeService.getAllJokesContaining(anyString())).thenReturn(expectedJokes);
-        mvc.perform(get("/api/joke/containing"))
+        mvc.perform(get("/api/joke/containing?contains=dad"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].joke").value(expected.getJoke()))
                 .andExpect(jsonPath("[0].jokeId").value(expected.getJokeId()));

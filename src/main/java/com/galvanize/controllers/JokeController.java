@@ -24,4 +24,10 @@ public class JokeController {
     public List<Joke> getAllJokes(){
         return service.getAllJokes();
     }
+
+    @GetMapping("/containing")
+    public List<Joke> getAllJokesContaining(@RequestParam String contains){
+        return service.getAllJokesContaining(contains);
+    }
+
 }
