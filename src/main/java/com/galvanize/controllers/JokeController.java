@@ -2,10 +2,9 @@ package com.galvanize.controllers;
 
 import com.galvanize.entities.Joke;
 import com.galvanize.services.JokeService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/joke")
@@ -19,5 +18,10 @@ public class JokeController {
     @PostMapping
     public Joke postJoke(@RequestBody Joke input){
         return service.postJoke(input);
+    }
+
+    @GetMapping
+    public List<Joke> getAllJokes(){
+        return service.getAllJokes();
     }
 }
