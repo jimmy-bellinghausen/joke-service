@@ -1,0 +1,29 @@
+package com.galvanize.services;
+
+import com.galvanize.entities.Category;
+import com.galvanize.entities.Joke;
+import com.galvanize.repositories.JokeRepository;
+import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatchers;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.when;
+
+@SpringBootTest
+public class JokeServiceTest {
+    @MockBean
+    JokeRepository jokeRepository;
+
+    @Test
+    public void postJoke(){
+        JokeService service = new JokeService(jokeRepository);
+        Joke input = new Joke(Category.DADJOKES,"Hi hungry, I'm dad!");
+        Joke expected = new Joke(1L, Category.DADJOKES,"Hi hungry, I'm dad!");
+        when(jokeRepository.save(any(Joke.class))).thenReturn(expected);
+        assertEquals(expected,service.postJoke(input));
+    }
+}

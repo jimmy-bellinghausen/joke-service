@@ -6,6 +6,7 @@ import java.util.Objects;
 @Entity
 @Table
 public class Joke {
+    @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long jokeId;
