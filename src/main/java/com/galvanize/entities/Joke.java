@@ -68,4 +68,10 @@ public class Joke {
     public int hashCode() {
         return Objects.hash(getJokeId(), getCategory(), getJoke());
     }
+
+    public void update(Joke updateJoke){
+        if(updateJoke.getCategory()!=null)this.setCategory(updateJoke.getCategory());
+        if(updateJoke.getJokeId()!=0)this.setJokeId(updateJoke.getJokeId());
+        if(updateJoke.getJoke()!=null)this.setJoke(updateJoke.getJoke());
+    }
 }

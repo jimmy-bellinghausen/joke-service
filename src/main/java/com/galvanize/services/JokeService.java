@@ -50,4 +50,8 @@ public class JokeService {
         List<Joke> jokes = getAllJokesByCategory(category);
         return jokes.get((int)(Math.random()*jokes.size()-1));
     }
+
+    public Joke update(long jokeId, Joke updateJoke) {
+        return null;
+    }
 }

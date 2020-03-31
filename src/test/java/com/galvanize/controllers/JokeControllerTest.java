@@ -127,4 +127,18 @@ class JokeControllerTest {
                 .andExpect(jsonPath("$").value(expected));
     }
 
+    @Test
+    public void patchJokes() throws Exception{
+        Joke expected = new Joke();
+        expected.setJokeId(1L);
+        expected.setCategory(Category.DADJOKES);
+        Joke patchJoke = new Joke();
+        patchJoke.setCategory(Category.DADJOKES);
+        String json = mapper.writeValueAsString(patchJoke);
+        when(jokeService.update(anyLong(), any(Joke.class))).thenReturn(expected);
+        mvc.perform(patch("/api/joke/1").content(json).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").value(expected));
+    }
+
 }

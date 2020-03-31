@@ -11,6 +11,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -88,5 +89,16 @@ public class JokeServiceTest {
         Joke expected = new Joke(1L, Category.DADJOKES,"Hi hungry, I'm dad!");
         when(jokeRepository.findAllByCategory(any(Category.class))).thenReturn(Arrays.asList(expected));
         assertEquals(expected, service.getRandomJoke(Category.DADJOKES));
+    }
+
+    @Test
+    public void updateJoke(){
+        JokeService service = new JokeService(jokeRepository);
+        Joke preUpdateJoke = new Joke(1L, Category.KIDJOKES,"Hi hungry, I'm dad!");
+        Joke expected = new Joke(preUpdateJoke.getJokeId(), Category.DADJOKES,preUpdateJoke.getJoke());
+        Joke updateJoke = new Joke();
+        updateJoke.setCategory(expected.getCategory());
+        when(jokeRepository.findById(anyLong())).thenReturn(Optional.of(preUpdateJoke));
+        assertEquals(expected, service.update(preUpdateJoke.getJokeId(), updateJoke));
     }
 }
