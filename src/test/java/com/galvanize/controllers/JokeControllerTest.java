@@ -144,7 +144,7 @@ class JokeControllerTest {
     @Test
     public void deleteJokeById() throws Exception{
         when(jokeService.deleteById(anyLong())).thenReturn(true);
-        mvc.perform(delete("/1"))
+        mvc.perform(delete("/api/joke/1"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").value(true));
     }

@@ -48,4 +48,9 @@ public class JokeController {
         return service.update(id, updateJoke);
     }
 
+    @DeleteMapping("/{id}")
+    public boolean updateJoke(@PathVariable long id){
+        return service.deleteById(id);
+    }
+
 }
