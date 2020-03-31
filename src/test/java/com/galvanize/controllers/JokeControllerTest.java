@@ -113,7 +113,7 @@ class JokeControllerTest {
         when(jokeService.getRandomJoke()).thenReturn(expected);
         mvc.perform(get("/api/joke/random"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.jokeId").value(expected));
+                .andExpect(jsonPath("$").value(expected));
     }
 
 }

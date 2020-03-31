@@ -29,10 +29,10 @@ public class JokeService {
     }
 
     public List<Joke> getAllJokesContaining(String input, Category category) {
-        List<Joke> jokesContainingString = repository.findAllByJokeContaining(input);
+        List<Joke> jokesContainingString = getAllJokesContaining(input);
         List<Joke> returnList = new ArrayList<>();
         jokesContainingString.forEach((Joke joke) ->{
-            if(joke.getJoke().contains(input)){returnList.add(joke);}
+            if(joke.getCategory().equals(category)){returnList.add(joke);}
         });
         return returnList;
     }

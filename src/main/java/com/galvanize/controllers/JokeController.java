@@ -37,4 +37,9 @@ public class JokeController {
         return service.getAllJokesByCategory(category);
     }
 
+    @GetMapping("/random")
+    public Joke getRandomJoke(){
+        return service.getRandomJoke();
+    }
+
 }
