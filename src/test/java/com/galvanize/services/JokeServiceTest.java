@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -71,5 +72,13 @@ public class JokeServiceTest {
         expectedJokes.add(expected);
         when(jokeRepository.findAllByCategory(any(Category.class))).thenReturn(expectedJokes);
         assertEquals(expectedJokes, service.getAllJokesByCategory(Category.DADJOKES));
+    }
+
+    @Test
+    public void getRandomJoke(){
+        JokeService service = new JokeService(jokeRepository);
+        Joke expected = new Joke(1L, Category.DADJOKES,"Hi hungry, I'm dad!");
+        when(jokeRepository.findAll()).thenReturn(Arrays.asList(expected));
+        assertEquals(expected, service.getRandomJoke());
     }
 }

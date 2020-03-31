@@ -40,4 +40,9 @@ public class JokeService {
     public List<Joke> getAllJokesByCategory(Category category) {
         return repository.findAllByCategory(category);
     }
+
+    public Joke getRandomJoke() {
+        List<Joke> jokes = getAllJokes();
+        return jokes.get((int)(Math.random()*jokes.size()-1));
+    }
 }
