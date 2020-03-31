@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -42,7 +42,7 @@ class JokeControllerTest {
         Joke expected = new Joke();
         String json = mapper.writeValueAsString(expected);
         expected.setJokeId(1L);
-        when(jokeService.postJoke(ArgumentMatchers.any(Joke.class))).thenReturn(expected);
+        when(jokeService.postJoke(any(Joke.class))).thenReturn(expected);
         mvc.perform(post("/api/joke").content(json).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.jokeId").value(expected.getJokeId()));
@@ -82,12 +82,12 @@ class JokeControllerTest {
         expected.setCategory(Category.DADJOKES);
         ArrayList<Joke> expectedJokes = new ArrayList<>();
         expectedJokes.add(expected);
-        when(jokeService.getAllJokesContaining(anyString())).thenReturn(expectedJokes);
-        mvc.perform(get("/api/joke/containing?contains=dad&category=DADJOKES"))
+        when(jokeService.getAllJokesContaining(anyString(), any(Category.class))).thenReturn(expectedJokes);
+        mvc.perform(get("/api/joke/containing?contains=dad&searchCategory=DADJOKES"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].joke").value(expected.getJoke()))
                 .andExpect(jsonPath("$[0].jokeId").value(expected.getJokeId()))
-                .andExpect(jsonPath("$[0].category").value(expected.getCategory()));
+                .andExpect(jsonPath("$[0].category").value(expected.getCategory().toString()));
     }
 
 }

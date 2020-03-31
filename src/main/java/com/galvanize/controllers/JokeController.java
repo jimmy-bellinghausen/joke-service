@@ -1,5 +1,6 @@
 package com.galvanize.controllers;
 
+import com.galvanize.entities.Category;
 import com.galvanize.entities.Joke;
 import com.galvanize.services.JokeService;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,9 @@ public class JokeController {
     }
 
     @GetMapping("/containing")
-    public List<Joke> getAllJokesContaining(@RequestParam String contains){
-        return service.getAllJokesContaining(contains);
+    public List<Joke> getAllJokesContaining(@RequestParam String contains, @RequestParam(required = false) Category searchCategory){
+        if(searchCategory==null){return service.getAllJokesContaining(contains);}
+        return service.getAllJokesContaining(contains, searchCategory);
     }
 
 }
