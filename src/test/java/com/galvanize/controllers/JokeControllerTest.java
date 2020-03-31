@@ -90,4 +90,20 @@ class JokeControllerTest {
                 .andExpect(jsonPath("$[0].category").value(expected.getCategory().toString()));
     }
 
+    @Test
+    public void getAllJokesByCategory() throws Exception{
+        Joke expected = new Joke();
+        expected.setJokeId(1L);
+        expected.setJoke("Hi hungry, I'm dad!");
+        expected.setCategory(Category.DADJOKES);
+        ArrayList<Joke> expectedJokes = new ArrayList<>();
+        expectedJokes.add(expected);
+        when(jokeService.getAllJokesByCategory(any(Category.class))).thenReturn(expectedJokes);
+        mvc.perform(get("/api/joke/category?category=DADJOKES"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].joke").value(expected.getJoke()))
+                .andExpect(jsonPath("$[0].jokeId").value(expected.getJokeId()))
+                .andExpect(jsonPath("$[0].category").value(expected.getCategory().toString()));
+    }
+
 }

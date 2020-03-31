@@ -36,4 +36,8 @@ public class JokeService {
         });
         return returnList;
     }
+
+    public List<Joke> getAllJokesByCategory(Category category) {
+        return repository.findAllByCategory(category);
+    }
 }
