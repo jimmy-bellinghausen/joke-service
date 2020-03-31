@@ -38,8 +38,9 @@ public class JokeController {
     }
 
     @GetMapping("/random")
-    public Joke getRandomJoke(){
-        return service.getRandomJoke();
+    public Joke getRandomJoke(@RequestParam(required = false) Category category){
+        if(category==null)return service.getRandomJoke();
+        return service.getRandomJoke(category);
     }
 
 }
