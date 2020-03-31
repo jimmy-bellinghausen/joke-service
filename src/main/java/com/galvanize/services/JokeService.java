@@ -1,5 +1,6 @@
 package com.galvanize.services;
 
+import com.galvanize.entities.Category;
 import com.galvanize.entities.Joke;
 import com.galvanize.repositories.JokeRepository;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,14 @@ public class JokeService {
 
     public List<Joke> getAllJokesContaining(String input) {
         return repository.findAllByJokeContaining(input);
+    }
+
+    public List<Joke> getAllJokesContaining(String input, Category category) {
+        List<Joke> jokesContainingString = repository.findAllByJokeContaining(input);
+        List<Joke> returnList = new ArrayList<>();
+        jokesContainingString.forEach((Joke joke) ->{
+            if(joke.getJoke().contains(input)){returnList.add(joke);}
+        });
+        return returnList;
     }
 }

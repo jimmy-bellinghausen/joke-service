@@ -48,4 +48,18 @@ public class JokeServiceTest {
         when(jokeRepository.findAllByJokeContaining(anyString())).thenReturn(expectedJokes);
         assertEquals(expectedJokes, service.getAllJokesContaining("dad"));
     }
+
+    @Test
+    public void getAllJokesContainingCategory(){
+        JokeService service = new JokeService(jokeRepository);
+        Joke expected = new Joke(1L, Category.DADJOKES,"Hi hungry, I'm dad!");
+        Joke knockKnockJoke = new Joke(1L, Category.KNOCKKNOCK,"Knock knock, orange you glad I didn't say banana?");
+        ArrayList<Joke> allJokes = new ArrayList<>();
+        ArrayList<Joke> expectedJokes = new ArrayList<>();
+        allJokes.add(expected);
+        allJokes.add(knockKnockJoke);
+        expectedJokes.add(expected);
+        when(jokeRepository.findAllByJokeContaining(anyString())).thenReturn(allJokes);
+        assertEquals(expectedJokes, service.getAllJokesContaining("dad", Category.DADJOKES));
+    }
 }
