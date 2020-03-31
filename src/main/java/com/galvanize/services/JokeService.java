@@ -52,6 +52,9 @@ public class JokeService {
     }
 
     public Joke update(long jokeId, Joke updateJoke) {
-        return null;
+        Joke preUpdateJoke = repository.findById(jokeId).orElse(null);
+        if(preUpdateJoke==null)return null;
+        preUpdateJoke.update(updateJoke);
+        return preUpdateJoke;
     }
 }
