@@ -22,4 +22,8 @@ public class JokeService {
     public List<Joke> getAllJokes() {
         return repository.findAll();
     }
+
+    public List<Joke> getAllJokesContaining(String input) {
+        return repository.findAllByJokeContaining(input);
+    }
 }

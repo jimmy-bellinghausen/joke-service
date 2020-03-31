@@ -38,4 +38,14 @@ public class JokeServiceTest {
         when(jokeRepository.findAll()).thenReturn(expectedJokes);
         assertEquals(expectedJokes, service.getAllJokes());
     }
+
+    @Test
+    public void getAllJokesContaining(){
+        JokeService service = new JokeService(jokeRepository);
+        Joke expected = new Joke(1L, Category.DADJOKES,"Hi hungry, I'm dad!");
+        ArrayList<Joke> expectedJokes = new ArrayList<>();
+        expectedJokes.add(expected);
+        when(jokeRepository.findAllByJokeContaining(anyString())).thenReturn(expectedJokes);
+        assertEquals(expectedJokes, service.getAllJokesContaining("dad"));
+    }
 }

@@ -2,6 +2,7 @@ package com.galvanize.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.galvanize.entities.Category;
 import com.galvanize.entities.Joke;
 import com.galvanize.services.JokeService;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -56,6 +58,20 @@ class JokeControllerTest {
         mvc.perform(get("/api/joke"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].jokeId").value(expected.getJokeId()));
+    }
+
+    @Test
+    public void getAllJokesContaing() throws Exception{
+        Joke expected = new Joke();
+        expected.setJokeId(1L);
+        expected.setJoke("Hi hungry, I'm dad!");
+        ArrayList<Joke> expectedJokes = new ArrayList<>();
+        expectedJokes.add(expected);
+        when(jokeService.getAllJokesContaining(anyString())).thenReturn(expectedJokes);
+        mvc.perform(get("/api/joke/containing"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].joke").value(expected.getJoke()))
+                .andExpect(jsonPath("[0].jokeId").value(expected.getJokeId()));
     }
 
 }
