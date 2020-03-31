@@ -101,4 +101,12 @@ public class JokeServiceTest {
         when(jokeRepository.findById(anyLong())).thenReturn(Optional.of(preUpdateJoke));
         assertEquals(expected, service.update(preUpdateJoke.getJokeId(), updateJoke));
     }
+
+    @Test
+    public void deleteJokeById(){
+        JokeService service = new JokeService(jokeRepository);
+        when(jokeRepository.deleteByJokeId(anyLong())).thenReturn(true);
+        assertTrue(service.deleteById(1L));
+    }
+
 }

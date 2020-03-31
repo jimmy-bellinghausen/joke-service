@@ -141,4 +141,12 @@ class JokeControllerTest {
                 .andExpect(jsonPath("$").value(expected));
     }
 
+    @Test
+    public void deleteJokeById() throws Exception{
+        when(jokeService.deleteById(anyLong())).thenReturn(true);
+        mvc.perform(delete("/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").value(true));
+    }
+
 }

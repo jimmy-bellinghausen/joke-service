@@ -57,4 +57,8 @@ public class JokeService {
         preUpdateJoke.update(updateJoke);
         return preUpdateJoke;
     }
+
+    public boolean deleteById(long jokeId) {
+        return repository.deleteByJokeId(jokeId);
+    }
 }
