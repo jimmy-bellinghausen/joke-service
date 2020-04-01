@@ -105,7 +105,7 @@ public class JokeServiceTest {
     @Test
     public void deleteJokeById(){
         JokeService service = new JokeService(jokeRepository);
-        when(jokeRepository.deleteByJokeId(anyLong())).thenReturn(true);
+        when(jokeRepository.deleteByJokeId(anyLong())).thenReturn(1);
         assertTrue(service.deleteById(1L));
     }
 

@@ -5,10 +5,12 @@ import com.galvanize.entities.Joke;
 import com.galvanize.repositories.JokeRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class JokeService {
     JokeRepository repository;
 
@@ -59,6 +61,6 @@ public class JokeService {
     }
 
     public boolean deleteById(long jokeId) {
-        return repository.deleteByJokeId(jokeId);
+        return repository.deleteByJokeId(jokeId)==1;
     }
 }

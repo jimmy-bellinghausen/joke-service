@@ -11,5 +11,5 @@ import java.util.List;
 public interface JokeRepository extends JpaRepository<Joke, Long> {
     List<Joke> findAllByJokeContaining(String partOfJoke);
     List<Joke> findAllByCategory(Category category);
-    boolean deleteByJokeId(long id);
+    Integer deleteByJokeId(long id);
 }
